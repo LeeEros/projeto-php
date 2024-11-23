@@ -23,7 +23,7 @@
           Cadastros
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownCadastros">
-          <a class="dropdown-item" href="#">Clientes</a>
+          <a class="dropdown-item" href="../controller/cadastrar_cliente.php?page=listar">Clientes</a>
           <a class="dropdown-item" href="#">Produtos</a>
           <a class="dropdown-item" href="#">Fornecedor</a>
           <a class="dropdown-item" href="#">Funcionário</a>

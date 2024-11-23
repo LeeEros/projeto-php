@@ -31,18 +31,36 @@
         </div>
         <div class="form-group">
             <label for="senha">Recebe Whatsapp?</label>
-            <input type="radio" class="form-control" id="sim" name="sim" placeholder="Sim" required>
-            <input type="radio" class="form-control" id="nao" name="nao" placeholder="Não" required>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sim" id="sim">
+                <label class="form-check-label" for="sim">Sim</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
+                <label class="form-check-label" for="nao">Não</label>
+            </div>
         </div>
         <div class="form-group">
             <label for="senha">Recebe Email?</label>
-            <input type="radio" class="form-control" id="sim" name="sim" placeholder="Sim" required>
-            <input type="radio" class="form-control" id="nao" name="nao" placeholder="Não" required>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sim" id="sim">
+                <label class="form-check-label" for="sim">Sim</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
+                <label class="form-check-label" for="nao">Não</label>
+            </div>
         </div>
         <div class="form-group">
             <label for="senha">Recebe sms?</label>
-            <input type="radio" class="form-control" id="sim" name="sim" placeholder="Sim" required>
-            <input type="radio" class="form-control" id="nao" name="nao" placeholder="Não" required>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="sim" id="sim">
+                <label class="form-check-label" for="sim">Sim</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
+                <label class="form-check-label" for="nao">Não</label>
+            </div>
         </div>
         </div>
         <button type="submit" class="btn btn-primary">Cadastrar</button>

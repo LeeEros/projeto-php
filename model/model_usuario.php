@@ -1,5 +1,4 @@
 <?php 
-
     function salvarUsuario($conexao, $nome, $email, $senha, $id=null){
         if($id){
             if(!empty($senha)) {
