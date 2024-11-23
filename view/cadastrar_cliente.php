@@ -29,42 +29,43 @@
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
         </div>
-        <div class="form-group">
-            <label for="senha">Recebe Whatsapp?</label>
+        
+        <div class="mb-3">
+            <label class="form-label">Recebe WhatsApp?</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="sim" id="sim">
-                <label class="form-check-label" for="sim">Sim</label>
+                <input class="form-check-input" type="radio" name="recebe_whatsapp" id="sim_whats" value="1">
+                <label class="form-check-label" for="sim_whats">Sim</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
-                <div class="container mt-5">
-                    
-      <label class="form-check-label" for="nao">Não</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="senha">Recebe Email?</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="sim" id="sim">
-                <label class="form-check-label" for="sim">Sim</label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
-                <label class="form-check-label" for="nao">Não</label>
+                <input class="form-check-input" type="radio" name="recebe_whatsapp" id="nao_whats" value="0" checked>
+                <label class="form-check-label" for="nao_whats">Não</label>
             </div>
         </div>
-        <div class="form-group">
-            <label for="senha">Recebe sms?</label>
+
+        <div class="mb-3">
+            <label class="form-label">Recebe Email?</label>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="sim" id="sim">
-                <label class="form-check-label" for="sim">Sim</label>
+                <input class="form-check-input" type="radio" name="recebe_email" id="recebe_email_sim" value="1">
+                <label class="form-check-label" for="recebe_email_sim">Sim</label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="nao" id="nao" checked>
-                <label class="form-check-label" for="nao">Não</label>
+                <input class="form-check-input" type="radio" name="recebe_email" id="recebe_email_nao" value="0" checked>
+                <label class="form-check-label" for="recebe_email_nao">Não</label>
             </div>
         </div>
+
+        <div class="mb-3">
+            <label class="form-label">Recebe SMS?</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="recebe_sms" id="recebe_sms_sim" value="1">
+                <label class="form-check-label" for="recebe_sms_sim">Sim</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="recebe_sms" id="recebe_sms_nao" value="0" checked>
+                <label class="form-check-label" for="recebe_sms_nao">Não</label>
+            </div>
         </div>
+        
         <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>
 </div>
