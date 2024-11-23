@@ -1,7 +1,6 @@
 <div class="container mt-5">
     <h2>Editar Usuário</h2>
     <form action="?page=salvar" method="POST">
-        <!-- Campo oculto para enviar o ID do usuário -->
         <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
 
         <div class="form-group">
