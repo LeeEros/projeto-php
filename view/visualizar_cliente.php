@@ -55,6 +55,6 @@
 
     <div class="btn-group">
         <button type="button" class="btn btn-info" onclick="window.location.href='?page=listar'">Voltar</button>
-        <button type="button" class="btn btn-primary" onclick="window.location.href='?page=editar&id=<?php echo htmlspecialchars($cliente['id']); ?>'">Editar</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='?page=editar&id_cliente'=<?php echo htmlspecialchars($cliente['id_cliente']); ?>'">Editar</button>
 
 </div>
