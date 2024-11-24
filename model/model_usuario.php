@@ -26,13 +26,23 @@
         return $stmt->execute();
     }
 
-    function getUsuario($conexao, $id){
+    function getUsuario($conexao, $id) {
         $sql = "SELECT * FROM usuario WHERE id = ?";
         $stmt = $conexao->prepare($sql);
-        $stmt -> bind_param('i', $id);
-
-        return $stmt->execute();
-
+        
+        if ($stmt) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                return $result->fetch_assoc();
+            } else {
+                return false; 
+            }
+        } else {
+            return false; 
+        }
     }
+    
 
 ?>
