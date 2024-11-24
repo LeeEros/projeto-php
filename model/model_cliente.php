@@ -1,6 +1,6 @@
 <?php
 function salvarCliente($conexao, $cpf, $nome, $telefone, $score, $data_nascimento, $limite_credito, $email, $recebe_whatsapp, $recebe_email, $recebe_sms, $id = null) {
-    if ($id) {
+    if ($id_cliente) {
         $sql = "UPDATE cliente SET cpf = ?, nome = ?, telefone = ?, score = ?, data_nascimento = ?, limite_credito = ?, email = ?, recebe_whatsapp = ?, recebe_email = ?, recebe_sms = ? WHERE id = ?";
         $stmt = $conexao->prepare($sql);
         $stmt->bind_param("ssssssssssi", $cpf, $nome, $telefone, $score, $data_nascimento, $limite_credito, $email, $recebe_whatsapp, $recebe_email, $recebe_sms, $id);
@@ -12,14 +12,14 @@ function salvarCliente($conexao, $cpf, $nome, $telefone, $score, $data_nasciment
     return $stmt->execute();
 }
 
-function excluirCliente($conexao, $id) {
+function excluirCliente($conexao, $id_cliente) {
     $sql = "DELETE FROM cliente WHERE id = ?";
     $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $id_cliente);
     return $stmt->execute();
 }
 
-function getCliente($conexao, $id) {
+function getCliente($conexao, $id_cliente) {
     $sql = "SELECT * FROM cliente WHERE id = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("i", $id);
@@ -36,5 +36,20 @@ function listarClientes($conexao) {
         $clientes[] = $row;
     }
     return $clientes;
+}
+
+function getHistoricoCompras($conexao, $id_cliente) {
+    $sql = "SELECT * FROM venda WHERE id_cliente = ?";
+        
+    $stmt = $conexao->prepare($sql);    
+    if ($stmt === false) {
+        die('Erro na preparação da query: ' . $conexao->error);
+    }
+        
+    $stmt->bind_param("i", $id_cliente);
+    $stmt->execute();
+    
+    $result = $stmt->get_result();
+    return $result;
 }
 ?>
