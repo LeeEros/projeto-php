@@ -1,5 +1,5 @@
 <?php
-include("../model/banco.php");  
+include("../model/banco.php");
 
 if (isset($_GET['id_cliente'])) {
     $id_cliente = intval($_GET['id_cliente']);  
@@ -42,6 +42,8 @@ if ($stmt = $conexao->prepare($sql)) {
 
     $stmt->close(); 
 } else {
-    echo print "<div class='alert alert-danger' role='alert'>Não foram encontradas Compras desse cliente.</div>";
+    echo "<div class='alert alert-danger' role='alert'>Não foram encontradas compras desse cliente.</div>";
 }
+
+$conexao->close(); 
 ?>
