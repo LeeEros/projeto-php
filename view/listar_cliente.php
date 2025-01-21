@@ -1,8 +1,9 @@
 <div class="container">
 
 <h2>Lista de Clientes</h2>
-<div class="mb-3">
+<div class="mb-3 d-flex justify-content-between">
     <a href="?page=novo" class="btn btn-primary">Adicionar Cliente</a>
+    <a href="?page=enviar_promocoes" class="btn btn-success">Enviar Promoções</a>
 </div>
 
 <?php 

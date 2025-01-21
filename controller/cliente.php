@@ -62,6 +62,11 @@ switch (@$_REQUEST["page"]) {
         include("../view/visualizar_historico.php"); 
         break;
 
+    case 'enviar_promocoes':
+        include_once "../view/enviar_promocoes.php"; 
+        break;
+            
+
     default:
         include("../view/cadastrar_cliente.php"); 
         break;
