@@ -11,7 +11,7 @@ class EmailController {
         $this->mailerSend = new MailerSend(['api_key' => 'mlsn.dc6f160e86c1db181a6f75c1c47e8141e9c934f8db1f9b2be7a7eb1a3c8a0d3a']);
     }
 
-    public function enviarEmailPromocional($conteudo, $destinatarios) {
+    public function enviarPromocoes($conteudo, $destinatarios) {
         $recipients = [];
         foreach ($destinatarios as $destinatario) {
             $recipients[] = new Recipient($destinatario['email'], $destinatario['nome']);
