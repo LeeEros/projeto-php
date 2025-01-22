@@ -47,7 +47,7 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id_cliente`, `cpf`, `nome`, `telefone`, `score`, `data_nascimento`, `limite_credito`, `email`, `recebe_whatsapp`, `recebe_email`, `recebe_sms`) VALUES
 (1, '12345678901', 'Cliente 1', '1111111111', 750, '1990-01-01', 2000, 'cliente1@email.com', 1, 1, 1),
-(2, '12345678902', 'Cliente 2', '2222222222', 600, '1985-02-02', 1500, 'cliente2@email.com', 1, 1, 0),
+(2, '12345678902', '12345678902', 'Cliente 2', '2222222222', 600, '1985-02-02', 1500, 'cliente2@email.com', 1, 1, 0),
 (3, '12345678903', 'Cliente 3', '3333333333', 800, '1992-03-03', 2500, 'cliente3@email.com', 0, 1, 1),
 (4, '12345678904', 'Cliente 4', '4444444444', 700, '1980-04-04', 1800, 'cliente4@email.com', 1, 0, 1),
 (5, '12345678905', 'Cliente 5', '5555555555', 650, '1995-05-05', 1200, 'cliente5@email.com', 1, 1, 0),
@@ -162,6 +162,17 @@ CREATE TABLE `parcela` (
   `numero_parcela` int(11) DEFAULT NULL,
   `confirma_pagamento` tinyint(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `parcela`
+--
+
+INSERT INTO `parcela` (`id_parcela`, `id_cliente`, `id_forma_pagamento`, `valor_parcela`, `data_vencimento`, `data_pagamento`, `confirma_pagamento`) VALUES
+(1, 1, 1, 150.00, '2024-01-01', '2024-01-01', 1),
+(2, 2, 2, 300.00, '2024-02-01', NULL, 0),
+(3, 3, 3, 450.00, '2024-03-01', '2024-03-02', 1),
+(4, 4, 4, 600.00, '2024-04-01', NULL, 0),
+(5, 5, 5, 750.00, '2024-05-01', '2024-05-01', 1);
 
 -- --------------------------------------------------------
 
