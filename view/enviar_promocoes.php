@@ -16,7 +16,6 @@ include_once '../model/banco.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conteudo = $_POST['conteudo_promocional'];
     
-    // Buscar destinatários que aceitaram receber emails
     $sql = "SELECT nome, email FROM clientes WHERE aceita_email = 1";
     $result = $conn->query($sql);
     
