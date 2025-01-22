@@ -27,6 +27,7 @@ $total_parcelas = $row['total_parcelas'];
                 <th>Data de Vencimento</th>
                 <th>Data de Pagamento</th>
                 <th>Status</th>
+                <th>Parcelas Restantes</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,7 @@ $total_parcelas = $row['total_parcelas'];
                     <td><?php echo $parcela['data_vencimento']; ?></td>
                     <td><?php echo $parcela['data_pagamento']; ?></td>
                     <td><?php echo $parcela['confirma_pagamento'] ? 'Pago' : 'Atrasado'; ?></td>
+                    <td><?php echo $parcela['parcelas_restantes']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
