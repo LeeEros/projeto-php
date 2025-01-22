@@ -18,7 +18,9 @@ function atualizarStatusParcelas() {
 }
 
 function listarParcelas($conexao, $status = null) {
-    $sql = "SELECT p.id_parcela, c.nome as cliente_nome, f.nome as forma_pagamento_nome, p.valor_parcela, p.data_vencimento, p.data_pagamento, p.confirma_pagamento, (SELECT COUNT(*) FROM parcela WHERE id_cliente = p.id_cliente AND confirma_pagamento = 0) as parcelas_restantes
+    $sql = "SELECT p.id_parcela, c.nome as cliente_nome, f.nome as forma_pagamento_nome, p.valor_parcela, p.data_vencimento, p.data_pagamento, p.confirma_pagamento, 
+                   (SELECT COUNT(*) FROM parcela WHERE id_cliente = p.id_cliente AND confirma_pagamento = 0) as parcelas_restantes,
+                   DATEDIFF(CURDATE(), p.data_vencimento) as dias_atraso
             FROM parcela p
             JOIN cliente c ON p.id_cliente = c.id_cliente
             JOIN forma_pagamento f ON p.id_forma_pagamento = f.id_pagamento";

@@ -8,7 +8,6 @@ include_once '../view/contas_receber.php';
 $status = $_GET['status'] ?? null;
 $parcelas = listarParcelas($conexao, $status);
 
-// Verifica se existem parcelas
 $sql = "SELECT COUNT(*) as total_parcelas FROM parcela";
 $res = $conexao->query($sql);
 $row = $res->fetch_assoc();
@@ -28,6 +27,7 @@ $total_parcelas = $row['total_parcelas'];
                 <th>Data de Pagamento</th>
                 <th>Status</th>
                 <th>Parcelas Restantes</th>
+                <th>Dias de Atraso</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +41,7 @@ $total_parcelas = $row['total_parcelas'];
                     <td><?php echo $parcela['data_pagamento']; ?></td>
                     <td><?php echo $parcela['confirma_pagamento'] ? 'Pago' : 'Atrasado'; ?></td>
                     <td><?php echo $parcela['parcelas_restantes']; ?></td>
+                    <td><?php echo $parcela['confirma_pagamento'] ? 0 : $parcela['dias_atraso']; ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
