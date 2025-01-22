@@ -15,10 +15,27 @@ include_once '../model/banco.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conteudo = $_POST['conteudo_promocional'];
-    if (enviarPromocoes($conteudo)) {
-        echo "<div class='alert alert-success'>Promoções enviadas com sucesso!</div>";
+    
+    // Buscar destinatários que aceitaram receber emails
+    $sql = "SELECT nome, email FROM clientes WHERE aceita_email = 1";
+    $result = $conn->query($sql);
+    
+    $destinatarios = array();
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $destinatarios[] = array(
+                'nome' => $row['nome'],
+                'email' => $row['email']
+            );
+        }
+        
+        if (enviarPromocoes($conteudo, $destinatarios)) {
+            echo "<div class='alert alert-success'>Promoções enviadas com sucesso!</div>";
+        } else {
+            echo "<div class='alert alert-danger'>Erro ao enviar promoções. Verifique os logs.</div>";
+        }
     } else {
-        echo "<div class='alert alert-danger'>Erro ao enviar promoções. Verifique os logs.</div>";
+        echo "<div class='alert alert-warning'>Nenhum cliente disponível para receber promoções.</div>";
     }
 }
 ?>

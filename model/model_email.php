@@ -1,5 +1,5 @@
 <?php
-require_once '../vendor/autoload.php'; // Inclua o autoloader do Composer
+require_once '../vendor/autoload.php'; 
 use MailerSend\MailerSend;
 use MailerSend\Helpers\Builder\Recipient;
 use MailerSend\Helpers\Builder\EmailParams;
