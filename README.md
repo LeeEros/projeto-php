@@ -20,7 +20,7 @@ Liste os alunos que fazem parte do grupo.
 ## Referências
 
  - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Html](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
+ - [Html]([https://awesomeopensource.com/project/elangosundar/awesome-README-templates](https://developer.mozilla.org/pt-BR/docs/Web/HTML))
  - [CSS](https://developer.mozilla.org/pt-BR/docs/Web/CSS)
  - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
  - [PHP](https://www.php.net/)
