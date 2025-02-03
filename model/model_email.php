@@ -1,35 +1,19 @@
 <?php
-require_once '../vendor/autoload.php'; 
-use MailerSend\MailerSend;
-use MailerSend\Helpers\Builder\Recipient;
-use MailerSend\Helpers\Builder\EmailParams;
+include_once '../controller/email.php';
+include_once '../model/banco.php';
 
-class EmailController {
-    private $mailerSend;
-
-    public function __construct() {
-        $this->mailerSend = new MailerSend(['api_key' => 'mlsn.dc6f160e86c1db181a6f75c1c47e8141e9c934f8db1f9b2be7a7eb1a3c8a0d3a']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $conteudo = trim($_POST['conteudo_promocional']);
+    
+    if (empty($conteudo)) {
+        header("Location: ../view/enviar_promocoes.php?status=erro");
+        exit;
     }
-
-    public function enviarPromocoes($conteudo, $destinatarios) {
-        $recipients = [];
-        foreach ($destinatarios as $destinatario) {
-            $recipients[] = new Recipient($destinatario['email'], $destinatario['nome']);
-        }
-
-        $emailParams = (new EmailParams())
-            ->setFrom('20220008550@estudantes.ifpr.edu.br')
-            ->setFromName('Sua Empresa')
-            ->setRecipients($recipients)
-            ->setSubject('Promoção Especial para Você!')
-            ->setHtml("<p>$conteudo</p>")
-            ->setText(strip_tags($conteudo));
-
-        try {
-            $this->mailerSend->email->send($emailParams);
-            return true;
-        } catch (Exception $e) {
-            return 'Erro ao enviar o e-mail: ' . $e->getMessage();
-        }
+    
+    if (enviarPromocoes($conexao, $conteudo)) {
+        header("Location: ../view/enviar_promocoes.php?status=sucesso");
+    } else {
+        header("Location: ../view/enviar_promocoes.php?status=erro");
     }
 }
+?>

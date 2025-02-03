@@ -1,9 +1,8 @@
 <?php
-require_once '../vendor/autoload.php';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-use MailerSend\MailerSend;
-use MailerSend\Helpers\Builder\Recipient;
-use MailerSend\Helpers\Builder\EmailParams;
+require '../vendor/autoload.php';
 
 function getClientesParaPromocoes($conexao)
 {
@@ -20,33 +19,35 @@ function getClientesParaPromocoes($conexao)
 
 function enviarPromocoes($conexao, $conteudo)
 {
-    $apiKey = 'mlsn.dc6f160e86c1db181a6f75c1c47e8141e9c934f8db1f9b2be7a7eb1a3c8a0d3a';
-    $mailersend = new MailerSend(['api_key' => $apiKey]);
-
     $clientes = getClientesParaPromocoes($conexao);
     if (empty($clientes)) {
         return false;
     }
 
     foreach ($clientes as $email => $nome) {
-        $emailConteudo = str_replace('{{nome}}', $nome, $conteudo);
-        $recipients = [new Recipient($email, $nome)];
-
-        $emailParams = (new EmailParams())
-            ->setFrom('20220008550@estudantes.ifpr.edu.br')
-            ->setFromName('Nome da Empresa')
-            ->setRecipients($recipients)
-            ->setSubject('Promoção Exclusiva para Você!')
-            ->setHtml($emailConteudo)
-            ->setText(strip_tags($emailConteudo));
-
+        $mail = new PHPMailer(true);
+        
         try {
-            $mailersend->email->send($emailParams);
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'testetestephp@gmail.com'; 
+            $mail->Password = '@testePHP25'; 
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
+            
+            $mail->setFrom('alebrante.kayane22@gmail.com', 'Nome da Empresa');
+            $mail->addAddress($email, $nome);
+            $mail->isHTML(true);
+            $mail->Subject = 'Promoção Exclusiva para Você!';
+            $mail->Body = str_replace('{{nome}}', $nome, $conteudo);
+            $mail->AltBody = strip_tags($mail->Body);
+            
+            $mail->send();
         } catch (Exception $e) {
-            error_log("Erro ao enviar e-mail para $email: " . $e->getMessage());
+            error_log("Erro ao enviar e-mail para $email: " . $mail->ErrorInfo);
         }
     }
 
     return true;
 }
-?>
