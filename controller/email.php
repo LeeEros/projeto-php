@@ -1,53 +1,32 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+include_once '../model/model_email.php';
+include_once '../model/banco.php';
 
-require '../vendor/autoload.php';
+switch (@$_REQUEST["page"]) {
+    case "enviarEmail":
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titulo = trim($_POST['titulo_promocao']);
+            $conteudo = trim($_POST['conteudo_promocional']);
 
-function getClientesParaPromocoes($conexao)
-{
-    $clientes = [];
-    $sql = "SELECT nome, email FROM clientes WHERE recebe_email = 1";
+            if (empty($titulo) || empty($conteudo)) {
+                echo "<script>alert('Título e conteúdo são obrigatórios.');</script>";
+                
+                exit;
+            }
 
-    $result = mysqli_query($conexao, $sql);
-    while ($row = mysqli_fetch_assoc($result)) {
-        $clientes[$row['email']] = $row['nome'];
-    }
+            $sucesso = enviarPromocoes($conexao, $titulo, $conteudo);
 
-    return $clientes;
-}
-
-function enviarPromocoes($conexao, $conteudo)
-{
-    $clientes = getClientesParaPromocoes($conexao);
-    if (empty($clientes)) {
-        return false;
-    }
-
-    foreach ($clientes as $email => $nome) {
-        $mail = new PHPMailer(true);
-        
-        try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'testetestephp@gmail.com'; 
-            $mail->Password = '@testePHP25'; 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-            
-            $mail->setFrom('alebrante.kayane22@gmail.com', 'Nome da Empresa');
-            $mail->addAddress($email, $nome);
-            $mail->isHTML(true);
-            $mail->Subject = 'Promoção Exclusiva para Você!';
-            $mail->Body = str_replace('{{nome}}', $nome, $conteudo);
-            $mail->AltBody = strip_tags($mail->Body);
-            
-            $mail->send();
-        } catch (Exception $e) {
-            error_log("Erro ao enviar e-mail para $email: " . $mail->ErrorInfo);
+            if ($sucesso) {
+                echo "<script>alert('Promoções enviadas com sucesso..');</script>";
+                echo "<script>location.href='cliente.php?page=enviar_promocoes';</script>";;
+            } else {
+                echo  "<script>alert('Erro ao enviar promoções.');</script>";
+            }
         }
-    }
-
-    return true;
+        break;
+    
+    default:
+        echo "<script>alert('Página inválidascript>";
+        break;
 }
+?>

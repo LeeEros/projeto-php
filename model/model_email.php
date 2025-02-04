@@ -1,19 +1,66 @@
 <?php
-include_once '../controller/email.php';
-include_once '../model/banco.php';
+use Mailgun\Mailgun;
+require '../vendor/autoload.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $conteudo = trim($_POST['conteudo_promocional']);
-    
-    if (empty($conteudo)) {
-        header("Location: ../view/enviar_promocoes.php?status=erro");
-        exit;
+function getClientesParaPromocoes($conexao)
+{
+    $clientes = [];
+    $sql = "SELECT nome, email FROM clientes WHERE recebe_email = 1";
+
+    $result = mysqli_query($conexao, $sql);
+
+    if (!$result) {
+        error_log("Erro na consulta SQL: " . mysqli_error($conexao));
+        return [];
     }
-    
-    if (enviarPromocoes($conexao, $conteudo)) {
-        header("Location: ../view/enviar_promocoes.php?status=sucesso");
-    } else {
-        header("Location: ../view/enviar_promocoes.php?status=erro");
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $clientes[$row['email']] = $row['nome'];
+    }
+
+    return $clientes;
+}
+
+function enviarPromocoes($conexao,$titulo, $conteudo)
+{
+    $clientes = [];
+    $sql = "SELECT nome, email FROM cliente WHERE recebe_email = 1";
+
+    $result = mysqli_query($conexao, $sql);
+
+    if (!$result) {
+        error_log("Erro na consulta SQL: " . mysqli_error($conexao));
+        return [];
+    }
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $clientes[$row['email']] = $row['nome'];
+    }
+        
+
+    $mg = Mailgun::create('eb252d8691b330ecd28f23ffebdd6399-667818f5-339f527f');
+
+    foreach ($clientes as $email => $nome) {
+        $body = str_replace('{{nome}}', $nome, $conteudo);
+
+        try {
+            $result = $mg->messages()->send(
+                'sandboxbe19c77e25ce4c38b0271ee53061e6cf.mailgun.org',
+                [
+                    'from' => 'Mailgun Sandbox <postmaster@sandboxbe19c77e25ce4c38b0271ee53061e6cf.mailgun.org>',
+                    'to' => $email,
+                    'subject' => $titulo,
+                    'text' => $body
+                ]
+            );
+            return true;
+            
+        } catch (Exception $e) {
+            error_log("Erro ao enviar e-mail para $email: " . $e->getMessage());
+            print "Erro ao enviar para $email: " . $e->getMessage(); 
+            return false;
+        }
     }
 }
+
 ?>

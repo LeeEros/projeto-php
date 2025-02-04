@@ -1,6 +1,11 @@
 <?php
 
 function excluirVendasRelacionadas($conexao, $id_cliente) {
+    $sql_itens = "DELETE FROM itens_venda WHERE id_venda IN (SELECT id_venda FROM venda WHERE id_cliente = ?)";
+    $stmt_itens = $conexao->prepare($sql_itens);
+    $stmt_itens->bind_param("i", $id_cliente);
+    $stmt_itens->execute();
+
     $sql = "DELETE FROM venda WHERE id_cliente = ?";
     $stmt = $conexao->prepare($sql);
     $stmt->bind_param("i", $id_cliente);

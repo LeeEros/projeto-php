@@ -1,9 +1,14 @@
 <div class="container mt-5">
     <h2>Enviar Promoções Personalizadas</h2>
-    <form action="model_email.php" method="POST">
+    <form action="email.php?page=enviarEmail" method="POST">
+        <div class="form-group">
+            <label for="titulo_promocao">Título da Promoção</label>
+            <input type="text" class="form-control" id="titulo_promocao" name="titulo_promocao" placeholder="Digite o título da promoção" required>
+        </div>
         <div class="form-group">
             <label for="conteudo_promocional">Conteúdo da Promoção</label>
-            <textarea class="form-control" id="conteudo_promocional" name="conteudo_promocional" rows="5" placeholder="Escreva o conteúdo da promoção aqui. Use {{nome}} para personalizar com o nome do cliente." required></textarea>
+            <textarea class="form-control" id="conteudo_promocional" name="conteudo_promocional" rows="5" placeholder="Escreva o conteúdo da promoção aqui." required></textarea>
+            <p>Use {{nome}} para personalizar com o nome do cliente.</p>
         </div>
         <button type="submit" class="btn btn-success">Enviar Promoções</button>
     </form>

@@ -16,6 +16,10 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -39,6 +43,7 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
         ),
         'M' => 
         array (
+            'Mailgun\\' => 8,
             'MailerSend\\' => 11,
         ),
         'I' => 
@@ -49,6 +54,7 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
         'H' => 
         array (
             'Http\\Promise\\' => 13,
+            'Http\\Message\\MultipartStream\\' => 29,
             'Http\\Message\\' => 13,
             'Http\\Discovery\\' => 15,
             'Http\\Client\\Common\\' => 19,
@@ -65,6 +71,10 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
     );
 
     public static $prefixDirsPsr4 = array (
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
@@ -114,6 +124,10 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
         array (
             0 => __DIR__ . '/..' . '/nyholm/psr7/src',
         ),
+        'Mailgun\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mailgun/mailgun-php/src',
+        ),
         'MailerSend\\' => 
         array (
             0 => __DIR__ . '/..' . '/mailersend/mailersend/src',
@@ -121,8 +135,8 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/collections',
-            1 => __DIR__ . '/..' . '/illuminate/conditionable',
-            2 => __DIR__ . '/..' . '/illuminate/macroable',
+            1 => __DIR__ . '/..' . '/illuminate/macroable',
+            2 => __DIR__ . '/..' . '/illuminate/conditionable',
         ),
         'Illuminate\\Contracts\\' => 
         array (
@@ -131,6 +145,10 @@ class ComposerStaticInite8b13f816d4983efd0619af915fb32e4
         'Http\\Promise\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Message\\MultipartStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/multipart-stream-builder/src',
         ),
         'Http\\Message\\' => 
         array (
