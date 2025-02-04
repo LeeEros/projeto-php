@@ -2,25 +2,6 @@
 use Mailgun\Mailgun;
 require '../vendor/autoload.php';
 
-function getClientesParaPromocoes($conexao)
-{
-    $clientes = [];
-    $sql = "SELECT nome, email FROM clientes WHERE recebe_email = 1";
-
-    $result = mysqli_query($conexao, $sql);
-
-    if (!$result) {
-        error_log("Erro na consulta SQL: " . mysqli_error($conexao));
-        return [];
-    }
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        $clientes[$row['email']] = $row['nome'];
-    }
-
-    return $clientes;
-}
-
 function enviarPromocoes($conexao,$titulo, $conteudo)
 {
     $clientes = [];
