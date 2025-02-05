@@ -28,6 +28,7 @@ $total_parcelas = $row['total_parcelas'];
                 <th>Status</th>
                 <th>Parcelas Restantes</th>
                 <th>Dias de Atraso</th>
+                <th>Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -42,6 +43,9 @@ $total_parcelas = $row['total_parcelas'];
                     <td><?php echo $parcela['confirma_pagamento'] ? 'Pago' : 'Atrasado'; ?></td>
                     <td><?php echo $parcela['parcelas_restantes']; ?></td>
                     <td><?php echo $parcela['confirma_pagamento'] ? 0 : $parcela['dias_atraso']; ?></td>
+                    <td>
+                        <a href="visualizar_parcela.php?id=<?php echo $parcela['id_parcela']; ?>" class="btn btn-info">Visualizar</a>
+                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
