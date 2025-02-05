@@ -3,7 +3,7 @@
 
 <?php
 include_once '../model/banco.php';
-include_once '../view/contas_receber.php';
+include_once '../controller/contas.php';
 
 $status = $_GET['status'] ?? null;
 $parcelas = listarParcelas($conexao, $status);
@@ -44,7 +44,7 @@ $total_parcelas = $row['total_parcelas'];
                     <td><?php echo $parcela['parcelas_restantes']; ?></td>
                     <td><?php echo $parcela['confirma_pagamento'] ? 0 : $parcela['dias_atraso']; ?></td>
                     <td>
-                        <a href="visualizar_parcela.php?id=<?php echo $parcela['id_parcela']; ?>" class="btn btn-info">Visualizar</a>
+                        <a href="contas.php?page=visualizar_parcela&id=<?php echo $parcela['id_parcela']; ?>" class="btn btn-info">Visualizar</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

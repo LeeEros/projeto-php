@@ -1,32 +1,28 @@
 <?php
 
-function atualizarStatusParcelas() {
-    include '../model/banco.php';
-
+function atualizarStatusParcelas($conexao) {
     $data_atual = date('Y-m-d');
 
-    // Atualiza parcelas vencidas como "não pagas" (confirma_pagamento = 0)
     $sql = "UPDATE parcela 
             SET confirma_pagamento = 0 
             WHERE data_vencimento < ? AND confirma_pagamento IS NULL";
 
     $stmt = $conexao->prepare($sql);
     if (!$stmt) {
-        die("Erro ao preparar a consulta: " . $conexao->error);
+        die(json_encode(["status" => "error", "message" => "Erro ao preparar a consulta: " . $conexao->error]));
     }
     $stmt->bind_param("s", $data_atual);
     if (!$stmt->execute()) {
-        die("Erro ao atualizar status: " . $stmt->error);
+        die(json_encode(["status" => "error", "message" => "Erro ao atualizar status: " . $stmt->error]));
     }
     $stmt->close();
 
-    // Atualiza parcelas pagas como "pagas" (confirma_pagamento = 1)
     $sql = "UPDATE parcela 
             SET confirma_pagamento = 1 
             WHERE data_pagamento IS NOT NULL";
 
     if (!$conexao->query($sql)) {
-        die("Erro ao atualizar status: " . $conexao->error);
+        die(json_encode(["status" => "error", "message" => "Erro ao atualizar status: " . $conexao->error]));
     }
 }
 
@@ -45,7 +41,7 @@ function listarParcelas($conexao, $status = null) {
 
     $stmt = $conexao->prepare($sql);
     if (!$stmt) {
-        die("Erro ao preparar a consulta: " . $conexao->error);
+        die(json_encode(["status" => "error", "message" => "Erro ao preparar a consulta: " . $conexao->error]));
     }
 
     if ($status !== null) {
@@ -54,7 +50,7 @@ function listarParcelas($conexao, $status = null) {
     }
 
     if (!$stmt->execute()) {
-        die("Erro ao executar a consulta: " . $stmt->error);
+        die(json_encode(["status" => "error", "message" => "Erro ao executar a consulta: " . $stmt->error]));
     }
 
     $result = $stmt->get_result();

@@ -44,9 +44,8 @@
           Financeiro
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownFinanceiro">
-          <a class="dropdown-item" href="../view/listar_parcelas.php">Contas a Receber</a>
+          <a class="dropdown-item" href="../controller/contas.php?page=listar_parcelas">Contas a Receber</a>
           <a class="dropdown-item" href="#">Contas a Pagar</a>
-          <a class="dropdown-item" href="#">Inadimplentes</a>
         </div>
       </li>
       <li class="nav-item dropdown">

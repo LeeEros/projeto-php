@@ -1,6 +1,7 @@
 <?php 
 include 'template.php'; 
 include_once '../model/banco.php';
+include_once '../controller/contas.php';
 
 if (!$conexao) {
     die("Erro: Conexão com o banco não foi estabelecida.");
